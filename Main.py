@@ -1,4 +1,5 @@
 import pygame 
+import comodines
 from Constantes import *
 from Menu import *
 from Juego import *
@@ -34,6 +35,8 @@ while corriendo:
             pygame.mixer.music.stop()
             bandera_musica = False
         reiniciar_estadisticas(datos_juego)
+        # Resetear comodines cuando se vuelve al menú
+        comodines.resetear_comodines()
         ventana_actual = mostrar_menu(pantalla,cola_eventos)
     elif ventana_actual == "juego":
         porcentaje_volumen = datos_juego["volumen_musica"] / 100
@@ -56,7 +59,3 @@ while corriendo:
 
     # print(ventana_actual)
     pygame.display.flip()
-
-pygame.quit()
-    
-    
