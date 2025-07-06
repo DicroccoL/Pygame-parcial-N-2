@@ -23,5 +23,40 @@
         "nombre": "tiago",
         "puntuacion": 25,
         "fecha": "2025-07-06 13:30:45"
+    },
+    {
+        "nombre": "mariano",
+        "puntuacion": 225,
+        "fecha": "2025-07-06 16:13:36"
+    },
+    {
+        "nombre": "mariano",
+        "puntuacion": 225,
+        "fecha": "2025-07-06 16:13:37"
+    },
+    {
+        "nombre": "mariano",
+        "puntuacion": 225,
+        "fecha": "2025-07-06 16:13:37"
+    },
+    {
+        "nombre": "mariano",
+        "puntuacion": 225,
+        "fecha": "2025-07-06 16:13:38"
+    },
+    {
+        "nombre": "puto",
+        "puntuacion": -75,
+        "fecha": "2025-07-06 16:13:59"
+    },
+    {
+        "nombre": "puto",
+        "puntuacion": -75,
+        "fecha": "2025-07-06 16:14:01"
+    },
+    {
+        "nombre": "tequila",
+        "puntuacion": -75,
+        "fecha": "2025-07-06 16:14:28"
     }
 ]
