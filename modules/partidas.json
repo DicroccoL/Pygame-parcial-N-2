@@ -1,0 +1,32 @@
+[
+    {
+        "nombre": "as",
+        "puntuacion": 25,
+        "fecha": "2025-07-06 23:15:04"
+    },
+    {
+        "nombre": "as",
+        "puntuacion": -75,
+        "fecha": "2025-07-06 23:17:34"
+    },
+    {
+        "nombre": "asss",
+        "puntuacion": 25,
+        "fecha": "2025-07-06 23:20:28"
+    },
+    {
+        "nombre": "luc",
+        "puntuacion": 25,
+        "fecha": "2025-07-06 23:46:02"
+    },
+    {
+        "nombre": "elpepe",
+        "puntuacion": 1000,
+        "fecha": "2025-07-07 00:13:28"
+    },
+    {
+        "nombre": "elpepe",
+        "puntuacion": 1000,
+        "fecha": "2025-07-07 00:13:28"
+    }
+]

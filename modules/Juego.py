@@ -1,0 +1,107 @@
+import pygame
+from modules.Constantes import *
+from modules.Preguntas import *
+from modules.Funciones import *
+from modules.comodines import *
+
+pygame.init()
+
+pygame.display.set_caption("PREGUNTADOS")
+icono = pygame.image.load("./modules/assets/images/icono.png")
+pygame.display.set_icon(icono)
+
+pantalla = pygame.display.set_mode(PANTALLA)
+datos_juego = {
+    "puntuacion": 0,
+    "vidas": CANTIDAD_VIDAS,
+    "nombre": "",
+    "tiempo_restante": CANTIDAD_TIEMPO,
+    "comodines_usados": {"bomba": False}
+}
+fondo_pantalla = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo.jpg"), PANTALLA)
+
+# Elemento del juego
+caja_pregunta = crear_elemento_juego("./modules/assets/images/textura_pregunta.png", ANCHO_PREGUNTA, ALTO_PREGUNTA, 80, 80)
+lista_respuestas = crear_respuestas("./modules/assets/images/textura_respuesta.png", ANCHO_BOTON, ALTO_BOTON, 125, 245, 4)
+boton_bomba = crear_elemento_juego("./modules/assets/images/bomba.png", 60, 60, 420, 520)
+
+mezclar_lista(lista_preguntas)
+
+corriendo = True
+reloj = pygame.time.Clock()
+evento_tiempo = pygame.USEREVENT
+pygame.time.set_timer(evento_tiempo, 1000)
+
+def mostrar_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict) -> str:
+    if "racha" not in datos_juego:
+        datos_juego["racha"] = 0
+    if "mensaje_vida" not in datos_juego:
+        datos_juego["mensaje_vida"] = {"mostrar": False, "contador": 0}
+    if "respuestas_visibles" not in datos_juego:
+        datos_juego["respuestas_visibles"] = [True, True, True, True]
+
+    respuestas_visibles = datos_juego["respuestas_visibles"]
+    retorno = "juego"
+    pregunta_actual = lista_preguntas[datos_juego['indice']]
+
+    if datos_juego["vidas"] == 0 or datos_juego["tiempo_restante"] == 0:
+        retorno = "terminado"
+
+    for evento in cola_eventos:
+        if evento.type == pygame.QUIT:
+            retorno = "salir"
+        elif evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+            if boton_bomba["rectangulo"].collidepoint(evento.pos) and not datos_juego["comodines_usados"]["bomba"]:
+                datos_juego["respuestas_visibles"] = aplicar_bomba(pregunta_actual, lista_respuestas, respuestas_visibles)
+                datos_juego["comodines_usados"]["bomba"] = True
+            else:
+                respuesta = obtener_respuesta_click(lista_respuestas, evento.pos)
+                if respuesta is not None:
+                    if verificar_respuesta(datos_juego, pregunta_actual, respuesta):
+                        CLICK_SONIDO.play()
+                    else:
+                        ERROR_SONIDO.play()
+                    datos_juego['indice'] += 1
+                    if datos_juego['indice'] == len(lista_preguntas):
+                        mezclar_lista(lista_preguntas)
+                        datos_juego['indice'] = 0
+                    pregunta_actual = cambiar_pregunta(lista_preguntas, datos_juego['indice'], caja_pregunta, lista_respuestas)
+                    datos_juego["respuestas_visibles"] = [True, True, True, True]
+                    respuestas_visibles = datos_juego["respuestas_visibles"]
+
+        elif evento.type == evento_tiempo:
+            datos_juego["tiempo_restante"] -= 1
+
+    # Dibujo de pantalla
+    pantalla.blit(fondo_pantalla, (0, 0))
+    pantalla.blit(caja_pregunta["superficie"], caja_pregunta["rectangulo"])
+
+    for i in range(len(lista_respuestas)):
+        if respuestas_visibles[i]:
+            pantalla.blit(lista_respuestas[i]["superficie"], lista_respuestas[i]["rectangulo"])
+
+    mostrar_texto(caja_pregunta["superficie"], pregunta_actual["pregunta"], (20, 40), FUENTE_PREGUNTA, COLOR_NEGRO)
+
+    if respuestas_visibles[0]:
+        mostrar_texto(lista_respuestas[0]["superficie"], pregunta_actual["respuesta_1"], (20, 20), FUENTE_RESPUESTA, COLOR_BLANCO)
+    if respuestas_visibles[1]:
+        mostrar_texto(lista_respuestas[1]["superficie"], pregunta_actual["respuesta_2"], (20, 20), FUENTE_RESPUESTA, COLOR_BLANCO)
+    if respuestas_visibles[2]:
+        mostrar_texto(lista_respuestas[2]["superficie"], pregunta_actual["respuesta_3"], (20, 20), FUENTE_RESPUESTA, COLOR_BLANCO)
+    if respuestas_visibles[3]:
+        mostrar_texto(lista_respuestas[3]["superficie"], pregunta_actual["respuesta_4"], (20, 20), FUENTE_RESPUESTA, COLOR_BLANCO)
+
+    mostrar_texto(pantalla, f"VIDAS: {datos_juego['vidas']}", (10, 10), FUENTE_TEXTO)
+    mostrar_texto(pantalla, f"PUNTUACION: {datos_juego['puntuacion']}", (10, 40), FUENTE_TEXTO)
+    mostrar_texto(pantalla, f"TIEMPO: {datos_juego['tiempo_restante']} s", (300, 10), FUENTE_TEXTO)
+
+    if datos_juego["mensaje_vida"]["mostrar"]:
+        mostrar_texto(pantalla, "¡Vida extra por racha!", (120, 450), FUENTE_RESPUESTA, COLOR_VERDE)
+        datos_juego["mensaje_vida"]["contador"] -= 1
+        if datos_juego["mensaje_vida"]["contador"] <= 0:
+            datos_juego["mensaje_vida"]["mostrar"] = False
+
+    if not datos_juego["comodines_usados"]["bomba"]:
+        pantalla.blit(boton_bomba["superficie"], boton_bomba["rectangulo"])
+
+    return retorno
