@@ -5,7 +5,7 @@ from modules.Funciones import *
 pygame.init()
 lista_botones = crear_botones_menu()
 print(lista_botones)
-fondo_menu = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo.jpg"),PANTALLA)
+fondo_menu = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo_del_menu.jpg"),PANTALLA)
 
 def mostrar_menu(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event]) -> str:
     retorno = "menu"

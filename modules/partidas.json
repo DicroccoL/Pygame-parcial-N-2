@@ -28,5 +28,10 @@
         "nombre": "elpepe",
         "puntuacion": 1000,
         "fecha": "2025-07-07 00:13:28"
+    },
+    {
+        "nombre": "lacabra",
+        "puntuacion": 2350,
+        "fecha": "2025-07-07 11:45:33"
     }
 ]

@@ -96,7 +96,8 @@ def mostrar_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Even
     mostrar_texto(pantalla, f"TIEMPO: {datos_juego['tiempo_restante']} s", (300, 10), FUENTE_TEXTO)
 
     if datos_juego["mensaje_vida"]["mostrar"]:
-        mostrar_texto(pantalla, "¡Vida extra por racha!", (120, 450), FUENTE_RESPUESTA, COLOR_VERDE)
+        mostrar_texto(pantalla, "¡Vida extra por racha!", (120, 550), FUENTE_RESPUESTA, COLOR_BLANCO)
+        mostrar_texto(pantalla,"Bonus +15s por responder bien!",(120, 570),FUENTE_RESPUESTA,COLOR_BLANCO)
         datos_juego["mensaje_vida"]["contador"] -= 1
         if datos_juego["mensaje_vida"]["contador"] <= 0:
             datos_juego["mensaje_vida"]["mostrar"] = False

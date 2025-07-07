@@ -11,7 +11,7 @@ boton_volver = crear_elemento_juego("./modules/assets/images/textura_respuesta.p
 boton_mute = crear_elemento_juego("./modules/assets/images/mute.png", 60, 60, 220, 300)
 
 # Fondo escalado a 500x500 (PANTALLA)
-fondo = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo.jpg"), (500, 600))
+fondo = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo_del_menu.jpg"), (500, 600))
 
 
 def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict) -> str:

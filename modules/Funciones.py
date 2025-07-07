@@ -40,6 +40,7 @@ def verificar_respuesta(datos_juego:dict, pregunta:dict, respuesta:int) -> bool:
             datos_juego["vidas"] += 1
             datos_juego["mensaje_vida"]["mostrar"] = True
             datos_juego["mensaje_vida"]["contador"] = 30 
+            datos_juego["tiempo_restante"] += 15
 
         return True
     else:
@@ -83,7 +84,7 @@ def crear_botones_menu() -> list:
     pos_y = 115
 
     for i in range(4):
-        boton = crear_elemento_juego("./modules/assets/images/textura_respuesta.png",ANCHO_BOTON,ALTO_BOTON,125,pos_y)
+        boton = crear_elemento_juego("./modules/assets/images/fondo_menu.png",ANCHO_BOTON_MENU,ALTO_BOTON_MENU,125,pos_y)
         pos_y += 80
         lista_botones.append(boton)
         
