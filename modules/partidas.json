@@ -33,5 +33,15 @@
         "nombre": "lacabra",
         "puntuacion": 2350,
         "fecha": "2025-07-07 11:45:33"
+    },
+    {
+        "nombre": "asas",
+        "puntuacion": 125,
+        "fecha": "2025-07-07 15:48:27"
+    },
+    {
+        "nombre": "asasas",
+        "puntuacion": -75,
+        "fecha": "2025-07-07 15:52:33"
     }
 ]

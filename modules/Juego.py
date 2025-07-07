@@ -20,10 +20,26 @@ datos_juego = {
 }
 fondo_pantalla = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo.jpg"), PANTALLA)
 
-# Elemento del juego
-caja_pregunta = crear_elemento_juego("./modules/assets/images/textura_pregunta.png", ANCHO_PREGUNTA, ALTO_PREGUNTA, 80, 80)
-lista_respuestas = crear_respuestas("./modules/assets/images/textura_respuesta.png", ANCHO_BOTON, ALTO_BOTON, 125, 245, 4)
-boton_bomba = crear_elemento_juego("./modules/assets/images/bomba.png", 60, 60, 420, 520)
+# Elementos centrados
+caja_pregunta = crear_elemento_juego(
+    "./modules/assets/images/textura_pregunta.png",
+    ANCHO_PREGUNTA, ALTO_PREGUNTA,
+    (ANCHO - ANCHO_PREGUNTA) // 2, 50
+)
+
+x_respuesta = (ANCHO - ANCHO_BOTON) // 2
+y_respuesta_inicial = 250
+lista_respuestas = crear_respuestas(
+    "./modules/assets/images/textura_respuesta.png",
+    ANCHO_BOTON, ALTO_BOTON,
+    x_respuesta, y_respuesta_inicial, 4
+)
+
+boton_bomba = crear_elemento_juego(
+    "./modules/assets/images/bomba.png",
+    60, 60,
+    ANCHO - 80, ALTO - 80
+)
 
 mezclar_lista(lista_preguntas)
 
@@ -72,7 +88,6 @@ def mostrar_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Even
         elif evento.type == evento_tiempo:
             datos_juego["tiempo_restante"] -= 1
 
-    # Dibujo de pantalla
     pantalla.blit(fondo_pantalla, (0, 0))
     pantalla.blit(caja_pregunta["superficie"], caja_pregunta["rectangulo"])
 
@@ -93,11 +108,11 @@ def mostrar_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Even
 
     mostrar_texto(pantalla, f"VIDAS: {datos_juego['vidas']}", (10, 10), FUENTE_TEXTO)
     mostrar_texto(pantalla, f"PUNTUACION: {datos_juego['puntuacion']}", (10, 40), FUENTE_TEXTO)
-    mostrar_texto(pantalla, f"TIEMPO: {datos_juego['tiempo_restante']} s", (300, 10), FUENTE_TEXTO)
+    mostrar_texto(pantalla, f"TIEMPO: {datos_juego['tiempo_restante']} s", (ANCHO - 220, 10), FUENTE_TEXTO)
 
     if datos_juego["mensaje_vida"]["mostrar"]:
-        mostrar_texto(pantalla, "¡Vida extra por racha!", (120, 550), FUENTE_RESPUESTA, COLOR_BLANCO)
-        mostrar_texto(pantalla,"Bonus +15s por responder bien!",(120, 570),FUENTE_RESPUESTA,COLOR_BLANCO)
+        mostrar_texto(pantalla, "¡Vida extra por racha!", (ANCHO//2 - 150, ALTO - 140), FUENTE_RESPUESTA, COLOR_BLANCO)
+        mostrar_texto(pantalla,"Bonus +15s por responder bien!",(ANCHO//2 - 150, ALTO - 120),FUENTE_RESPUESTA,COLOR_BLANCO)
         datos_juego["mensaje_vida"]["contador"] -= 1
         if datos_juego["mensaje_vida"]["contador"] <= 0:
             datos_juego["mensaje_vida"]["mostrar"] = False

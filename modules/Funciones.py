@@ -81,13 +81,18 @@ def cambiar_pregunta(lista_preguntas:list,indice:int,caja_pregunta:dict,lista_re
 
 def crear_botones_menu() -> list:
     lista_botones = []
-    pos_y = 115
 
-    for i in range(4):
-        boton = crear_elemento_juego("./modules/assets/images/fondo_menu.png",ANCHO_BOTON_MENU,ALTO_BOTON_MENU,125,pos_y)
-        pos_y += 80
+    cantidad_botones = 4
+    espaciado = 20
+    alto_total = cantidad_botones * ALTO_BOTON_MENU + (cantidad_botones - 1) * espaciado
+    pos_y = (ALTO - alto_total) // 2  # Centrado vertical
+    pos_x = (ANCHO - ANCHO_BOTON_MENU) // 2  # Centrado horizontal
+
+    for _ in range(cantidad_botones):
+        boton = crear_elemento_juego("./modules/assets/images/fondo_menu.png", ANCHO_BOTON_MENU, ALTO_BOTON_MENU, pos_x, pos_y)
         lista_botones.append(boton)
-        
+        pos_y += ALTO_BOTON_MENU + espaciado
+
     return lista_botones
 
 def crear_respuestas(textura:str,ancho:int,alto:int,pos_x:int,pos_y:int,cantidad_respuestas:int) -> list:

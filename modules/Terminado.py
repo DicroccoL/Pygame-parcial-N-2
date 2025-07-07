@@ -6,10 +6,10 @@ from datetime import datetime
 import random
 
 pygame.init()
-cuadro_texto = crear_elemento_juego("./modules/assets/images/textura_respuesta.png", ANCHO_CUADRO, ALTO_CUADRO, 140, 140)
+cuadro_texto = crear_elemento_juego("./modules/assets/images/textura_respuesta.png", ANCHO_CUADRO, ALTO_CUADRO, 480, 150)
 fondo = pygame.transform.scale(pygame.image.load("./modules/assets/images/game over.png"), PANTALLA)
 boton_volver = crear_elemento_juego("./modules/assets/images/textura_respuesta.png", 100, 40, 10, 10)
-boton_guardar = crear_elemento_juego("./modules/assets/images/textura_respuesta.png", 100, 40, 400, 10)
+boton_guardar = crear_elemento_juego("./modules/assets/images/textura_respuesta.png", 100, 40, 550, 210)
 
 def mostrar_fin_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict, lista_rankings: list) -> str:
     retorno = "terminado"
@@ -60,7 +60,7 @@ def mostrar_fin_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.
     
     pantalla.blit(fondo, (0, 0))
     pantalla.blit(cuadro_texto["superficie"], cuadro_texto["rectangulo"])
-    mostrar_texto(pantalla, f"Usted obtuvo: {datos_juego['puntuacion']} puntos", (90, 110), FUENTE_TEXTO, COLOR_BLANCO)
+    mostrar_texto(pantalla, f"Usted obtuvo: {datos_juego['puntuacion']} puntos", (440, 55), FUENTE_TEXTO, COLOR_BLANCO)
     
     pantalla.blit(boton_volver["superficie"], boton_volver["rectangulo"])
     mostrar_texto(boton_volver["superficie"], "MENU", (5, 10), FUENTE_RESPUESTA, COLOR_BLANCO)
@@ -69,9 +69,9 @@ def mostrar_fin_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.
     mostrar_texto(boton_guardar["superficie"], "GUARDAR", (5, 10), FUENTE_RESPUESTA, COLOR_BLANCO)
 
     if datos_juego.get("guardado_exito"):
-        mostrar_texto(pantalla, "¡Guardado!", (250, 160), FUENTE_RESPUESTA, COLOR_BLANCO)
+        mostrar_texto(pantalla, "¡Guardado!", (560, 290), FUENTE_RESPUESTA, COLOR_BLANCO)
     elif datos_juego.get("guardado") and not datos_juego.get("guardado_exito"):
-        mostrar_texto(pantalla, "Nombre inválido (solo letras, mín. 3 )", (90, 190), FUENTE_RESPUESTA, "#F20606")
+        mostrar_texto(pantalla, "Nombre inválido (solo letras, mín. 3 )", (440, 133), FUENTE_RESPUESTA, "#F20606")
 
     limpiar_superficie(cuadro_texto, "./modules/assets/images/textura_respuesta.png", ANCHO_CUADRO, ALTO_CUADRO)
 

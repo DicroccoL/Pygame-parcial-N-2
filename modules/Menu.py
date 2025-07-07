@@ -4,14 +4,12 @@ from modules.Funciones import *
 
 pygame.init()
 lista_botones = crear_botones_menu()
-print(lista_botones)
-fondo_menu = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo_del_menu.jpg"),PANTALLA)
+fondo_menu = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo_del_menu.jpg"), PANTALLA)
 
-def mostrar_menu(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event]) -> str:
+def mostrar_menu(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event]) -> str:
     retorno = "menu"
-    #Gestionar Eventos
+    
     for evento in cola_eventos:
-        #Actualizaciones
         if evento.type == pygame.QUIT:
             retorno = "salir"
         elif evento.type == pygame.MOUSEBUTTONDOWN:
@@ -26,16 +24,14 @@ def mostrar_menu(pantalla:pygame.Surface,cola_eventos:list[pygame.event.Event]) 
                             retorno = "ajustes"
                         else:
                             retorno = "salir"
-        
-    
-    #Dibujar en pygame
-    pantalla.blit(fondo_menu,(0,0))
-    for i in range(len(lista_botones)):
-        pantalla.blit(lista_botones[i]["superficie"],lista_botones[i]["rectangulo"])
-    mostrar_texto(lista_botones[BOTON_JUGAR]["superficie"],"JUGAR",(70,20),FUENTE_TEXTO,COLOR_BLANCO)
-    mostrar_texto(lista_botones[BOTON_PUNTUACIONES]["superficie"],"RANKINGS",(70,20),FUENTE_TEXTO,COLOR_BLANCO)
-    mostrar_texto(lista_botones[BOTON_CONFIG]["superficie"],"AJUSTES",(70,20),FUENTE_TEXTO,COLOR_BLANCO)
-    mostrar_texto(lista_botones[BOTON_SALIR]["superficie"],"SALIR",(70,20),FUENTE_TEXTO,COLOR_BLANCO)
 
+    pantalla.blit(fondo_menu, (0, 0))
+    for i in range(len(lista_botones)):
+        pantalla.blit(lista_botones[i]["superficie"], lista_botones[i]["rectangulo"])
+
+    mostrar_texto(lista_botones[BOTON_JUGAR]["superficie"], "JUGAR", (70, 20), FUENTE_TEXTO, COLOR_BLANCO)
+    mostrar_texto(lista_botones[BOTON_PUNTUACIONES]["superficie"], "RANKINGS", (70, 20), FUENTE_TEXTO, COLOR_BLANCO)
+    mostrar_texto(lista_botones[BOTON_CONFIG]["superficie"], "AJUSTES", (70, 20), FUENTE_TEXTO, COLOR_BLANCO)
+    mostrar_texto(lista_botones[BOTON_SALIR]["superficie"], "SALIR", (70, 20), FUENTE_TEXTO, COLOR_BLANCO)
 
     return retorno

@@ -5,13 +5,13 @@ from modules.Funciones import *
 pygame.init()
 
 # Crear botones con sus imágenes, tamaños y posiciones
-boton_suma = crear_elemento_juego("./modules/assets/images/mas.webp", 60, 60, 420, 200)
-boton_resta = crear_elemento_juego("./modules/assets/images/menos.webp", 60, 60, 20, 200)
+boton_suma = crear_elemento_juego("./modules/assets/images/mas.webp", 60, 60, 710, 300) 
+boton_resta = crear_elemento_juego("./modules/assets/images/menos.webp", 60, 60, 510, 300)
 boton_volver = crear_elemento_juego("./modules/assets/images/textura_respuesta.png", 100, 40, 10, 10)
-boton_mute = crear_elemento_juego("./modules/assets/images/mute.png", 60, 60, 220, 300)
+boton_mute = crear_elemento_juego("./modules/assets/images/mute.png", 60, 60, 610, 400)
 
 # Fondo escalado a 500x500 (PANTALLA)
-fondo = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo_del_menu.jpg"), (500, 600))
+fondo = pygame.transform.scale(pygame.image.load("./modules/assets/images/fondo_del_menu.jpg"), (1280, 720))
 
 
 def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict) -> str:
@@ -50,7 +50,7 @@ def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Ev
 
     # Rectángulo negro semitransparente para resaltar el texto del volumen
     cuadro_ancho, cuadro_alto = 120, 50
-    cuadro_x = (500 - cuadro_ancho) // 2  # centro horizontal pantalla 500x500
+    cuadro_x = (1280 - cuadro_ancho) // 2  # centro horizontal pantalla 500x500
     cuadro_y = 180  # vertical fijo para que quede arriba de la barra
 
     superficie_cuadro = pygame.Surface((cuadro_ancho, cuadro_alto), pygame.SRCALPHA)
@@ -67,8 +67,9 @@ def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Ev
     mostrar_texto(boton_volver["superficie"], "VOLVER", (5, 5), FUENTE_RESPUESTA, COLOR_BLANCO)
 
     # Barra de volumen visual
-    barra_base = pygame.Rect(100, 250, 300, 20)
-    barra_relleno = pygame.Rect(100, 250, 3 * datos_juego["volumen_musica"], 20)
+    barra_base = pygame.Rect((1280 - 300) // 2, 270, 300, 20)
+    barra_relleno = pygame.Rect((1280 - 300) // 2, 270, 3 * datos_juego["volumen_musica"], 20)
+
 
     pygame.draw.rect(pantalla, (200, 200, 200), barra_base)  # Fondo de la barra (gris)
     pygame.draw.rect(pantalla, (0, 255, 0), barra_relleno)  # Barra rellena (verde)
