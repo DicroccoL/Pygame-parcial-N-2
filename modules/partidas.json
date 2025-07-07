@@ -43,5 +43,20 @@
         "nombre": "asasas",
         "puntuacion": -75,
         "fecha": "2025-07-07 15:52:33"
+    },
+    {
+        "nombre": "lucas",
+        "puntuacion": 325,
+        "fecha": "2025-07-07 17:01:32"
+    },
+    {
+        "nombre": "asas",
+        "puntuacion": 25,
+        "fecha": "2025-07-07 17:45:25"
+    },
+    {
+        "nombre": "elpepe",
+        "puntuacion": 525,
+        "fecha": "2025-07-07 17:53:23"
     }
 ]
