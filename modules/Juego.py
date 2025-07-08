@@ -29,7 +29,6 @@ datos_juego = {
     "doble_chance_activado": False,
     "intento_doble": False,
     "pasar_activado": False,
-
 }
 
 # Fondo y elementos iniciales
@@ -49,21 +48,23 @@ lista_respuestas = crear_respuestas(
     x_respuesta, y_respuesta_inicial, 4
 )
 
+#Saco las coordenadas para poder centrar cada comodin con cada respuesta
+y_bomba = y_respuesta_inicial
+y_x2 = y_respuesta_inicial + ALTO_BOTON + 8
+y_doble = y_x2 + ALTO_BOTON + 8
+y_pasar = y_doble + ALTO_BOTON + 8
 # Botones de comodines
-boton_bomba = crear_elemento_juego("./modules/assets/images/bomba.png", 60, 60, ANCHO - 485, ALTO - 480)
-boton_x2 = crear_elemento_juego("./modules/assets/images/x2.png", 60, 60, ANCHO - 490, ALTO - 400)
-boton_doble_chance = crear_elemento_juego("./modules/assets/images/doble_chance.png", 60, 60, ANCHO - 495, ALTO - 300)
-boton_pasar = crear_elemento_juego("./modules/assets/images/pasar.png", 60, 60, ANCHO - 500, ALTO - 200)
-
-
-# Ordenar preguntas al azar
+boton_bomba = crear_elemento_juego("./modules/assets/images/bomba.png", 40, 40, ANCHO - 485, ALTO - 460)
+boton_x2 = crear_elemento_juego("./modules/assets/images/x2.png", 40, 40, ANCHO - 486, ALTO - 378)
+boton_doble_chance = crear_elemento_juego("./modules/assets/images/doble_chance.png", 40, 40, ANCHO - 485, ALTO - 300)
+boton_pasar = crear_elemento_juego("./modules/assets/images/pasar.png", 40, 40, ANCHO - 485, ALTO - 220)
+# ordenar preguntas al azar
 mezclar_lista(lista_preguntas)
 
 corriendo = True
 reloj = pygame.time.Clock()
 evento_tiempo = pygame.USEREVENT
 pygame.time.set_timer(evento_tiempo, 1000)
-
 
 def mostrar_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict) -> str:
     """
@@ -192,6 +193,13 @@ def mostrar_juego(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Even
         datos_juego["mensaje_vida"]["contador"] -= 1
         if datos_juego["mensaje_vida"]["contador"] <= 0:
             datos_juego["mensaje_vida"]["mostrar"] = False
+
+    # Dibuja la barra negra detrás de los comodines
+    superficie_transparente = pygame.Surface((60, 300), pygame.SRCALPHA)
+    color_negro_transparente = (0, 0, 0, 150)
+    pygame.draw.rect(superficie_transparente, color_negro_transparente, pygame.Rect(0, 0, 60, 300), border_radius=8)
+    pantalla.blit(superficie_transparente, (ANCHO - 495, ALTO - 470))
+                        
 
     # Mostrar botones de comodines si no se usaron
     if not datos_juego["comodines_usados"]["bomba"]:
