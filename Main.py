@@ -1,15 +1,14 @@
 import pygame 
-import comodines
-from Constantes import *
-from Menu import *
-from Juego import *
-from Configuracion import *
-from Rankings import *
-from Terminado import *
+from modules.Constantes import *
+from modules.Menu import *
+from modules.Juego import *
+from modules.Configuracion import *
+from modules.Rankings import *
+from modules.Terminado import *
 
 pygame.init()
 pygame.display.set_caption("PREGUNTADOS")
-icono = pygame.image.load("icono.png")
+icono = pygame.image.load("./modules/assets/images/icono.png")
 pygame.display.set_icon(icono)
 pantalla = pygame.display.set_mode(PANTALLA)
 datos_juego = {"puntuacion":0,
@@ -17,7 +16,9 @@ datos_juego = {"puntuacion":0,
                "nombre":"",
                "tiempo_restante":CANTIDAD_TIEMPO,
                "indice":0,"volumen_musica":0,
-               "mensaje_vida": {"mostrar": False, "contador": 0}}
+               "mensaje_vida": {"mostrar": False, "contador": 0},
+               "comodines_usados": {"bomba": False}
+}
 corriendo = True
 reloj = pygame.time.Clock()
 bandera_musica = False
@@ -35,14 +36,12 @@ while corriendo:
             pygame.mixer.music.stop()
             bandera_musica = False
         reiniciar_estadisticas(datos_juego)
-        # Resetear comodines cuando se vuelve al menú
-        comodines.resetear_comodines()
         ventana_actual = mostrar_menu(pantalla,cola_eventos)
     elif ventana_actual == "juego":
         porcentaje_volumen = datos_juego["volumen_musica"] / 100
         
         if bandera_musica == False:
-            pygame.mixer.music.load("musica.mp3")
+            pygame.mixer.music.load("./modules/assets/sounds/musica.mp3")
             pygame.mixer.music.set_volume(porcentaje_volumen)
             pygame.mixer.music.play(-1)
             bandera_musica = True
@@ -59,3 +58,7 @@ while corriendo:
 
     # print(ventana_actual)
     pygame.display.flip()
+
+pygame.quit()
+    
+    
