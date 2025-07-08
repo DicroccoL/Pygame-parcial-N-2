@@ -48,11 +48,6 @@ lista_respuestas = crear_respuestas(
     x_respuesta, y_respuesta_inicial, 4
 )
 
-#Saco las coordenadas para poder centrar cada comodin con cada respuesta
-y_bomba = y_respuesta_inicial
-y_x2 = y_respuesta_inicial + ALTO_BOTON + 8
-y_doble = y_x2 + ALTO_BOTON + 8
-y_pasar = y_doble + ALTO_BOTON + 8
 # Botones de comodines
 boton_bomba = crear_elemento_juego("./modules/assets/images/bomba.png", 40, 40, ANCHO - 485, ALTO - 460)
 boton_x2 = crear_elemento_juego("./modules/assets/images/x2.png", 40, 40, ANCHO - 486, ALTO - 378)
