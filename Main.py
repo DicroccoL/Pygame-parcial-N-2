@@ -11,14 +11,7 @@ pygame.display.set_caption("PREGUNTADOS")
 icono = pygame.image.load("./modules/assets/images/icono.png")
 pygame.display.set_icon(icono)
 pantalla = pygame.display.set_mode(PANTALLA)
-datos_juego = {"puntuacion":0,
-               "vidas":CANTIDAD_VIDAS,
-               "nombre":"",
-               "tiempo_restante":CANTIDAD_TIEMPO,
-               "indice":0,"volumen_musica":0,
-               "mensaje_vida": {"mostrar": False, "contador": 0},
-               "comodines_usados": {"bomba": False}
-}
+
 corriendo = True
 reloj = pygame.time.Clock()
 bandera_musica = False

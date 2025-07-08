@@ -29,6 +29,10 @@ datos_juego = {
     "doble_chance_activado": False,
     "intento_doble": False,
     "pasar_activado": False,
+    "indice":0,"volumen_musica":0,
+    "mensaje_vida": {"mostrar": False, "contador": 0},
+    
+
 }
 
 # Fondo y elementos iniciales
